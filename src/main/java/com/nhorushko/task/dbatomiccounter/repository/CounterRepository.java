@@ -12,7 +12,7 @@ import static java.util.Objects.requireNonNull;
 public class CounterRepository {
     private static final String QUERY_INCREMENT_COUNTER = """
             UPDATE sk_example_table
-            SET obj = jsonb_set(obj, '{current}', to_jsonb(:increment + (obj->>'current')::int))
+            SET obj = jsonb_set(obj, '{current}', to_jsonb(:increment + (obj->>'current')::bigint))
             WHERE id = :id
             RETURNING obj->>'current' AS current_value
             """;
