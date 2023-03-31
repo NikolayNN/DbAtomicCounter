@@ -9,7 +9,8 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<ErrorMessage> handleIllegalArgumentException(Exception e) {
-        return ResponseEntity.status(418).body(new ErrorMessage(e.getMessage()));
+        var message = new ErrorMessage(e.getMessage());
+        return ResponseEntity.status(418).body(message);
     }
 
     private record ErrorMessage(String message){}
