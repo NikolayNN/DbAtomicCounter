@@ -35,7 +35,7 @@ class CounterControllerTest {
     @Sql("classpath:scripts/add-counter-1-with-value-10.sql")
     void modify_shouldReturn200WithIncrementedResult() throws Exception {
         var given = new CounterRequest(1, 15);
-        postResponse(URL_COUNTER_MODIFY, given, 200, "{\"current\":25}");
+        postResponse(given, 200, "{\"current\":25}");
     }
 
     @Test
@@ -43,11 +43,11 @@ class CounterControllerTest {
     @Sql("classpath:scripts/add-counter-1-with-value-10.sql")
     void modify_counterNotFoundShouldReturn418AndErrorMessage() throws Exception {
         var given = new CounterRequest(9999, 15);
-        postResponse(URL_COUNTER_MODIFY, given, 418, "{\"message\":\"Incorrect result size: expected 1, actual 0\"}");
+        postResponse(given, 418, "{\"message\":\"Incorrect result size: expected 1, actual 0\"}");
     }
 
-    protected void postResponse(String url, CounterRequest request, int expectedCode, String expectedBody) throws Exception {
-        var req = post(url)
+    protected void postResponse(CounterRequest request, int expectedCode, String expectedBody) throws Exception {
+        var req = post(CounterControllerTest.URL_COUNTER_MODIFY)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request));
         String actualBody = this.mockMvc
