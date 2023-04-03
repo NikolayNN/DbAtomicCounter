@@ -21,7 +21,7 @@ class CounterRepositoryTest {
     @Transactional
     @Sql("classpath:scripts/add-counter-1-with-value-10.sql")
     void name() {
-        Long actual = repository.increment(1, 5);
+        Long actual = repository.modify(1, 5);
         assertEquals(15, actual);
     }
 }

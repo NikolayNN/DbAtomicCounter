@@ -19,7 +19,7 @@ public class CounterRepository {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    public long increment(long id, long increment) {
+    public long modify(long id, long increment) {
         var params = new MapSqlParameterSource()
                 .addValue("id", id)
                 .addValue("increment", increment);

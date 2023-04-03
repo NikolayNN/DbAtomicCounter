@@ -12,7 +12,7 @@ public class CounterService {
     private final CounterRepository repository;
 
     public CounterResponse modify(CounterRequest request) {
-        long increment = repository.increment(request.id(), request.add());
+        long increment = repository.modify(request.id(), request.add());
         return new CounterResponse(increment);
     }
 }
